@@ -1,29 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CrearColumnas : MonoBehaviour
 {
+    [SerializeField] Text MyText;
     //Variable de tipo Object que contendrá el Prefab a instanciar
     [SerializeField] GameObject MyColumn;
     //Variable de tipo Transform que contendrá el objeto de referencia
     [SerializeField] Transform RefPos;
-    public int tiempo = 1;
-   
+    public int tiempo = 2;
+    public int columnas = 0;
     // Start is called before the first frame update
     void Start()
     {
-        
-        
         StartCoroutine("ColumnCorrutine");
+        StartCoroutine("Contador");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
 
-    
     void CrearColumna()
     {
         float posRandom = Random.Range(-9.5f, 9.5f);
@@ -32,15 +28,22 @@ public class CrearColumnas : MonoBehaviour
         Vector3 NewPos = RefPos.position + DestPos;
         Instantiate(MyColumn, NewPos, Quaternion.identity);
     }
-       IEnumerator ColumnCorrutine()
+    IEnumerator ColumnCorrutine()
     {
 
-        for (int n=0; ; n++ )
+        for (int n = 0; ; n++)
         {
-            print(n);
-            //Intancio el prefab en coordenadas 0,0,0
-            //Instantiate(MyColumn);
             CrearColumna();
+            yield return new WaitForSeconds(tiempo);
+            columnas++;
+         }
+    }
+
+    IEnumerator Contador()
+    {
+        for (int n = 0; ; n++)
+        {
+            MyText.text = columnas.ToString("00");
             yield return new WaitForSeconds(tiempo);
         }
     }
