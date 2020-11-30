@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Sphere : MonoBehaviour
 {
     
-    [SerializeField] float speed = 30f;
+    [SerializeField] float speed = 10f;
 
     // Start is called before the first frame update
     void Start()
@@ -22,8 +22,6 @@ public class Sphere : MonoBehaviour
     
     void MoverNave()
     {
-        print(transform.position.x);
-
         float desplZ = Input.GetAxis("Vertical");
         float desplX = Input.GetAxis("Horizontal");
         float PosX = transform.position.x;
